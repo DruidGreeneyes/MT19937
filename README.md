@@ -12,7 +12,7 @@ You can access functions just as in the original, except the package is now call
 (let ((test-state (soup:seed-random-state "WHY DO YOU KEEP DOING THIS TO ME!?")))
   (loop for i from 0 below 12 collect (soup:random 1000 test-state)))
  
- => (990 699 689 393 245 303 320 872 244 257 166 256)
+=> (990 699 689 393 245 303 320 872 244 257 166 256)
 ```
 
 Here follows the original readme.
