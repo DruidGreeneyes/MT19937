@@ -1,5 +1,19 @@
 # cl-soup
-This is a fork of the CL implementation of MT19937 Mersenne Twister. I don't own it and claim no credit. It's here because it was impossible to find. (It's on quicklisp and quickdocs, but the only way to get at the source was to install it via quicklisp and open up the resultant zip file). I renamed it because while MT19937 is accurate, it's a bear to type. I also added a seed function, because the original was not concise and not exported. I don't claim mine is better, I just wanted an easier way to access it. Don't like it? Great, write a better one and do a pull request, or however this github thingy is supposed to work.
+This is a fork of the CL implementation of MT19937 Mersenne Twister. I don't own it and claim no credit. It's here because it was impossible to find. (It's on quicklisp and quickdocs, but the only way to get at the source was to install it via quicklisp and open up the resultant zip file). I renamed the package to 'soup' because while MT19937 is accurate, it's a bear to type. I also added a seed function, because the original was not concise and not exported. I don't claim mine is better, I just wanted an easier way to access it. Don't like it? Great, write a better one and do a pull request, or however this github thingy is supposed to work.
+
+You can access functions just as in the original, except the package is now called 'soup'. Also there's a new seed function:
+
+```common-lisp
+(let ((test-state (soup:seed-random-state "OMGWTFBBQ!?")))
+  (soup:random 1000 test-state))
+  
+=> 204
+
+(let ((test-state (soup:seed-random-state "WHY DO YOU KEEP DOING THIS TO ME!?")))
+  (loop for i from 0 below 12 collect (soup:random 1000 test-state)))
+ 
+ => (990 699 689 393 245 303 320 872 244 257 166 256)
+```
 
 Here follows the original readme.
 
