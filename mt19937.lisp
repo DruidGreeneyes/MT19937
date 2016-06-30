@@ -18,7 +18,7 @@
 ;;; generator.", ACM Transactions on Modeling and Computer Simulation,
 ;;; 1997, to appear.
 
-(in-package #:soup)
+(in-package #:mt19937)
 
 (defconstant mt19937-n 624)
 (defconstant mt19937-m 397)
@@ -190,12 +190,9 @@
            (make-random-object :state (init-random-state (generate-seed))))
           (t (error "Argument is not a RANDOM-STATE, T or NIL: ~S" state)))))
 
-(defun seed-random-state (seed-object)
-  (let ((seed (typecase seed-object
-                ((unsigned-byte 32) seed-object)
-                (fixnum (mod seed-object (1- (expt 2 32))))
-                (t (sxhash seed-object)))))
-    (make-random-object :state (init-random-state seed))))
+(defun seed-random-state (seed)
+  (declare (type (integer 1 #xffffffff) seed))
+  (make-random-object :state (init-random-state seed)))
 
 ;;;; Random entries:
 
@@ -241,7 +238,7 @@
 (defun random-chunk (state)
   (declare (type random-state state)
            (optimize (speed 3) (safety 0)))
-  (let* ((state (random-state-state state))
+  (let* ((state (get-state state))
          (k (aref state 2)))
     (declare (type (mod 628) k))
     (when (= k mt19937-n)

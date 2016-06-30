@@ -1,4 +1,4 @@
-(defpackage #:soup
+(defpackage #:mt19937
   (:use :common-lisp)
   (:shadow #:random-state
            #:random-state-p
